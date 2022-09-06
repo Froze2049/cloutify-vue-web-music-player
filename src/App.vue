@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import RootContainer from "./components/RootContainer/RootContainer.vue";
+import RootContainer from "./pages/RootContainer.vue";
 
 export default {
   name: "App",

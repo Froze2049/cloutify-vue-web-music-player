@@ -3,22 +3,20 @@
     <top-nav></top-nav>
     <left-nav></left-nav>
     <playing-bar></playing-bar>
-    <main-view></main-view>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import TopNav from "../NavBar/TopNav.vue";
-import LeftNav from "../NavBar/LeftNav.vue";
-import PlayingBar from "../NavBar/PlayingBar.vue";
-import MainView from "../MainView/MainView.vue";
+import TopNav from "../components/NavBar/TopNav.vue";
+import LeftNav from "../components/NavBar/LeftNav.vue";
+import PlayingBar from "../components/NavBar/PlayingBar.vue";
 
 export default {
   components: {
     LeftNav,
     TopNav,
     PlayingBar,
-    MainView,
   },
 };
 </script>
