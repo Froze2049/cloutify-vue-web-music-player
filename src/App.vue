@@ -1,14 +1,14 @@
 <template>
-  <index-menu />
+  <root-container></root-container>
 </template>
 
 <script>
-import IndexMenu from "./components/IndexMenu.vue";
+import RootContainer from "./components/RootContainer/RootContainer.vue";
 
 export default {
   name: "App",
   components: {
-    IndexMenu,
+    RootContainer,
   },
 };
 </script>
