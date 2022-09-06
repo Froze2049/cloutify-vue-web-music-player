@@ -36,5 +36,8 @@ export default {
   width: 100%;
   position: relative;
   background-color: #ddd;
+  margin: 0 auto;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px #000000;
 }
 </style>

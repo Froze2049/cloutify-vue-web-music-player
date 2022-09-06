@@ -12,5 +12,6 @@ export default {};
   background-color: #d26363d2;
   width: 230px;
   height: 100%;
+  border-radius: 20px 0 0 0;
 }
 </style>

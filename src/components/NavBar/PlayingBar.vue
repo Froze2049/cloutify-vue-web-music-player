@@ -11,5 +11,6 @@ export default {};
   grid-area: now-playing-bar;
   height: 90px;
   background-color: #6c6c6c;
+  border-radius: 0 0px 20px 20px;
 }
 </style>

@@ -11,5 +11,6 @@ export default {};
   grid-area: top-bar;
   height: 64px;
   background-color: #6c6c6c;
+  border-radius: 0 20px 0 0;
 }
 </style>
