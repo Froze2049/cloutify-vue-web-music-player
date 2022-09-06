@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import DiscoveryView from "../components/MainView/DiscoveryView.vue";
+import DiscoveryView from "../pages/DiscoveryView.vue";
 
 const router = createRouter({
   history: createWebHistory(),
