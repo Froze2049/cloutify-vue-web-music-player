@@ -10,7 +10,7 @@ export default {};
 .bottom-now-playing-bar {
   grid-area: now-playing-bar;
   height: 90px;
-  background-color: #6c6c6c;
-  border-radius: 0 0px 20px 20px;
+  background-color: #181818;
+  /* border-radius: 0 0px 20px 20px; */
 }
 </style>
