@@ -25,8 +25,6 @@ export default {};
   font-size: 18px;
   color: #fff;
 }
-.logo {
-}
 ul {
   width: 90%;
   padding: 0;
@@ -45,7 +43,7 @@ li {
 li:hover,
 li.active {
   border-radius: 7px;
-  background-color: #181818;
+  background-color: #282828;
 }
 span {
   font-size: 18px;

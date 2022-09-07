@@ -3,12 +3,14 @@
     <div class="title">发现歌单</div>
     <div class="list">
       <div class="card" v-for="list in playLists" :key="list">
-        <div class="top">
-          <img :src="list.picUrl" class="image" />
-        </div>
-        <div class="bottom">
-          <span class="description">{{ list.name }}</span>
-        </div>
+        <router-link :to="{ path: '/playlist', query: { id: list.id } }">
+          <div class="top">
+            <img :src="list.picUrl" class="image" />
+          </div>
+          <div class="bottom">
+            <span class="description">{{ list.name }}</span>
+          </div>
+        </router-link>
       </div>
     </div>
   </div>
@@ -52,25 +54,30 @@ div.list {
 div.card {
   border-radius: 5px;
   width: 200px;
-  height: 220px;
+  height: 230px;
   margin: 0 0 40px 19px;
   transition: all 0.5s;
-  background-color: transparent;
-  color: rgb(0, 0, 0);
-  box-shadow: 0 0 8px #484848;
+  box-shadow: 0 0 8px #282828;
 }
-
+.router-link-active {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+}
+a {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+}
 .bottom {
   width: 200px;
-  height: 20px;
-  font-size: 14px;
-  line-height: 20px;
+  height: 30px;
+  font-size: 16px;
+  line-height: 30px;
   display: flex;
-  background-color: #fff;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: inline-block;
+  background-color: #181818;
   border-radius: 0 0 5px 5px;
+}
+.bottom:hover {
+  background-color: #282828;
 }
 div.top {
   overflow: hidden;
@@ -80,10 +87,20 @@ div.top {
   width: 200px;
   height: 200px;
   display: block;
+  border-radius: 5px 5px 0 0;
   transition: all 0.3s ease-in 0s;
 }
 .image:hover {
   transform: scale(1.2);
   transition: all 0.3s ease-in;
+}
+.description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  margin: 0px 5px 0 5px;
+  vertical-align: middle;
+  color: #fff;
 }
 </style>
