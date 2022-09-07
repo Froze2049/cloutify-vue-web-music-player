@@ -1,31 +1,30 @@
 <template>
   <div class="main-view">
     <div class="carousel">
-      <el-carousel :interval="4000" type="card" height="232px">
+      <el-carousel
+        :interval="4000"
+        type="card"
+        height="232px"
+        v-if="banners.length > 0"
+      >
         <el-carousel-item v-for="banner in banners" :key="banner">
           <img :src="banner.imageUrl" />
         </el-carousel-item>
       </el-carousel>
-      <!-- <el-carousel :interval="4000" type="card" height="200px">
-        <el-carousel-item v-for="(banner, index) in banners" :key="index + 1">
-          <h3 text="2xl" justify="center">{{ index }}</h3>
-        </el-carousel-item>
-      </el-carousel> -->
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
-import axios from "axios";
+import { getBanner } from "../request/api/discovery.js";
 let banners = ref([]);
-onMounted(() => {
-  axios
-    .get("http://localhost:3000/banner?type=0")
+onMounted(async () => {
+  getBanner()
     .then((response) => {
       // 处理成功情况
+      console.log(response);
       banners.value = response.data.banners;
-      console.log(banners);
     })
     .catch(function (error) {
       // 处理错误情况
