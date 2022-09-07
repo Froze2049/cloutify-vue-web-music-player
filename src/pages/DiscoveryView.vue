@@ -13,7 +13,7 @@
           </el-carousel-item>
         </el-carousel>
       </div>
-      <play-list></play-list>
+      <playlist-preview></playlist-preview>
     </el-scrollbar>
   </div>
 </template>
@@ -21,7 +21,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { getBanner } from "@/request/api/discovery.js";
-import PlayList from "@/components/PlayList/PlayList.vue";
+import PlaylistPreview from "@/components/PlayList/PlaylistPreview.vue";
 let banners = ref([]);
 
 onMounted(async () => {
