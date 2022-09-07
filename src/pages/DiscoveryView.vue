@@ -1,15 +1,40 @@
 <template>
   <div class="main-view">
-    <el-carousel :interval="4000" type="card" height="200px">
-      <el-carousel-item v-for="item in 6" :key="item">
-        <h3 text="2xl" justify="center">{{ item }}</h3>
-      </el-carousel-item>
-    </el-carousel>
+    <div class="carousel">
+      <el-carousel :interval="4000" type="card" height="232px">
+        <el-carousel-item v-for="banner in banners" :key="banner">
+          <img :src="banner.imageUrl" />
+        </el-carousel-item>
+      </el-carousel>
+      <!-- <el-carousel :interval="4000" type="card" height="200px">
+        <el-carousel-item v-for="(banner, index) in banners" :key="index + 1">
+          <h3 text="2xl" justify="center">{{ index }}</h3>
+        </el-carousel-item>
+      </el-carousel> -->
+    </div>
   </div>
 </template>
 
-<script>
-export default {};
+<script setup>
+import { ref, onMounted } from "vue";
+import axios from "axios";
+let banners = ref([]);
+onMounted(() => {
+  axios
+    .get("http://localhost:3000/banner?type=0")
+    .then((response) => {
+      // 处理成功情况
+      banners.value = response.data.banners;
+      console.log(banners);
+    })
+    .catch(function (error) {
+      // 处理错误情况
+      console.log(error);
+    })
+    .then(function () {
+      // 总是会执行
+    });
+});
 </script>
 
 <style scoped>
@@ -17,12 +42,16 @@ export default {};
   grid-area: main-view;
   background-color: #121212;
 }
-.el-carousel__item h3 {
+div.carousel {
+  margin: 30px 40px 0 40px;
+}
+.el-carousel__item img {
   color: #475669;
   opacity: 0.75;
   line-height: 200px;
   margin: 0;
   text-align: center;
+  height: 100%;
 }
 
 .el-carousel__item:nth-child(2n) {
