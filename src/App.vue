@@ -47,4 +47,7 @@ body,
   /* border-radius: 20px; */
   box-shadow: 0 2px 8px #000000;
 }
+::-webkit-scrollbar {
+  display: none;
+}
 </style>

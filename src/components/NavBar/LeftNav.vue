@@ -17,8 +17,10 @@ export default {};
 .left-nav-bar {
   grid-area: nav-bar;
   background-color: #000000;
-  width: 210px;
+  width: 190px;
   height: 100%;
+  padding: 0;
+  margin: 0;
   /* border-radius: 20px 0 0 0; */
   font-size: 18px;
   color: #fff;
@@ -28,9 +30,10 @@ export default {};
 ul {
   width: 90%;
   padding: 0;
-  margin: 15px auto;
+  margin: 15px 0 15px 7px;
   list-style: none;
   text-align: center;
+  font-weight: 550;
 }
 li {
   padding: 5px 0 5px 0;

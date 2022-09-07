@@ -7,3 +7,11 @@ export function getBanner() {
     url: "/banner?type=0",
   });
 }
+
+// 获取推荐歌单
+export function getPlayList() {
+  return service({
+    method: "GET",
+    url: "/personalized?limit=12",
+  });
+}

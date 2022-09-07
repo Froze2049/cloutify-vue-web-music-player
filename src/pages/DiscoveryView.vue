@@ -1,29 +1,33 @@
 <template>
   <div class="main-view">
-    <div class="carousel">
-      <el-carousel
-        :interval="4000"
-        type="card"
-        height="232px"
-        v-if="banners.length > 0"
-      >
-        <el-carousel-item v-for="banner in banners" :key="banner">
-          <img :src="banner.imageUrl" />
-        </el-carousel-item>
-      </el-carousel>
-    </div>
+    <el-scrollbar max-height="580px">
+      <div class="carousel">
+        <el-carousel
+          :interval="4000"
+          type="card"
+          height="235px"
+          v-if="banners.length > 0"
+        >
+          <el-carousel-item v-for="banner in banners" :key="banner">
+            <img :src="banner.imageUrl" />
+          </el-carousel-item>
+        </el-carousel>
+      </div>
+      <play-list></play-list>
+    </el-scrollbar>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { getBanner } from "../request/api/discovery.js";
+import { getBanner } from "@/request/api/discovery.js";
+import PlayList from "@/components/PlayList/PlayList.vue";
 let banners = ref([]);
+
 onMounted(async () => {
   getBanner()
     .then((response) => {
       // 处理成功情况
-      console.log(response);
       banners.value = response.data.banners;
     })
     .catch(function (error) {
