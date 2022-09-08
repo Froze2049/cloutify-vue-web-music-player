@@ -25,16 +25,33 @@
           <span class="tag">歌单</span>
           <span class="name"> {{ playlist.name }}</span>
         </div>
-        <div class="info">dddd</div>
-        <div class="tags"></div>
+        <div class="info">
+          <span class="user-name">{{ creator }}</span>
+          <span class="date">{{ formatDate }}创建</span>
+        </div>
+        <div class="tags">
+          标签：<span class="tag" v-for="tag in playlist.tags" :key="tag">{{
+            tag
+          }}</span>
+        </div>
+        <div class="description" :alt="playlist.description">
+          {{ playlist.description }}
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-const props = defineProps(["playlist"]);
-
+import moment from "moment";
+import { onMounted, ref, toRefs } from "vue";
+const props = defineProps(["playlist", "creator"]);
+let formatDate = ref("");
+onMounted(() => {
+  formatDate.value = moment(toRefs(props).playlist.value.createTime).format(
+    "YYYY-MM-DD"
+  );
+});
 console.log("props");
 console.log(props);
 </script>
@@ -85,12 +102,20 @@ span.button-text {
 }
 div.detail {
   color: #fff;
+  font-size: 15px;
   margin-left: 10px;
 }
 div.title {
   font-size: 24px;
   position: relative;
   margin-bottom: 10px;
+}
+span.name {
+  white-space: nowrap;
+  overflow: hidden;
+}
+span.user-name {
+  margin-right: 10px;
 }
 span.tag {
   font-size: 14px;
@@ -100,8 +125,13 @@ span.tag {
   text-align: center;
   margin: 0 10px 0 0;
 }
-div.info {
-  font-size: 15px;
-  margin-top: 20px;
+div.info,
+div.tags,
+div.description {
+  margin-top: 15px;
+}
+div.description {
+  height: 62px;
+  overflow: scroll;
 }
 </style>

@@ -7,3 +7,11 @@ export function getPlaylistDetail(id) {
     url: `/playlist/detail?id=${id}`,
   });
 }
+
+// 获取歌单所有歌曲
+export function getAllSongs(id) {
+  return service({
+    method: "GET",
+    url: `/playlist/track/all?id=${id}&limit=10&offset=0`,
+  });
+}
