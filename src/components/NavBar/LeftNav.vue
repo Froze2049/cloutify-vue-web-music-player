@@ -18,7 +18,7 @@ export default {};
   grid-area: nav-bar;
   background-color: #000000;
   width: 190px;
-  height: 100%;
+  height: calc(100%-90px);
   padding: 0;
   margin: 0;
   /* border-radius: 20px 0 0 0; */

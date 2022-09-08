@@ -1,9 +1,18 @@
-<template>歌单详情页</template>
+<template>
+  <div class="container">
+    <el-scrollbar max-height="591.8px">
+      <playlist-header :playlist="playlist"></playlist-header>
+      <playlist-content></playlist-content>
+    </el-scrollbar>
+  </div>
+</template>
 
 <script setup>
 import { useRouter } from "vue-router";
 import { onMounted, ref } from "vue";
 import { getPlaylistDetail } from "@/request/api/playlist.js";
+import PlaylistHeader from "@/components/PlayList/PlaylistHeader.vue";
+import PlaylistContent from "@/components/PlayList/PlaylistContent.vue";
 
 const playlist = ref([]);
 onMounted(() => {
@@ -24,3 +33,10 @@ onMounted(() => {
     });
 });
 </script>
+
+<style scoped>
+.main-view {
+  grid-area: main-view;
+  background-color: #121212;
+}
+</style>
