@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <el-scrollbar max-height="591.8px">
+    <el-scrollbar>
       <playlist-header :playlist="playlist"></playlist-header>
       <playlist-content></playlist-content>
     </el-scrollbar>
@@ -35,7 +35,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.main-view {
+.container {
   grid-area: main-view;
   background-color: #121212;
 }
