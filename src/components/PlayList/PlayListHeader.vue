@@ -90,7 +90,7 @@ div.button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0 20px 0 20px;
+  margin: 0 25px 0 25px;
 }
 div.button .normal {
   color: #fff;
@@ -103,7 +103,7 @@ span.button-text {
 div.detail {
   color: #fff;
   font-size: 15px;
-  margin-left: 10px;
+  /* margin-left: 10px; */
 }
 div.title {
   font-size: 24px;

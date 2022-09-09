@@ -92,4 +92,7 @@ onMounted(async () => {
   grid-area: main-view;
   background-color: #121212;
 }
+el-scrollbar {
+  background-color: #121212;
+}
 </style>
