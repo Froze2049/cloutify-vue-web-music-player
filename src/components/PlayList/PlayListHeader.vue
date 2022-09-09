@@ -46,7 +46,7 @@
 import moment from "moment";
 import { onMounted, ref, toRefs } from "vue";
 const props = defineProps(["playlist", "creator"]);
-let formatDate = ref("");
+const formatDate = ref("");
 onMounted(() => {
   formatDate.value = moment(toRefs(props).playlist.value.createTime).format(
     "YYYY-MM-DD"

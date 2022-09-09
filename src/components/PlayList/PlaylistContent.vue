@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <div class="table">
-      <el-table :data="allsongs" height="500" style="width: 100%">
+      <el-table :data="allSongsFormat" style="width: 100%">
         <el-table-column prop="index" label="" width="180" />
         <el-table-column prop="title" label="标题" width="180" />
         <el-table-column prop="singer" label="歌手" />
@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-const props = defineProps(["allsongs"]);
+const props = defineProps(["allSongsFormat"]);
 console.log(8);
 console.log(props);
 </script>

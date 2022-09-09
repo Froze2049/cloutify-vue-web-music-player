@@ -1,13 +1,13 @@
 <template>
   <div class="container">
-    <el-scrollbar height="600">
+    <el-scrollbar max-height="580px">
       <playlist-header
         :playlist="playlist"
         :creator="creator"
       ></playlist-header>
       <playlist-content
         v-if="songsIsReady"
-        :allSongsFormat="allsongs"
+        :allSongsFormat="allSongsFormat"
       ></playlist-content>
     </el-scrollbar>
   </div>
@@ -19,14 +19,15 @@ import { onMounted, ref } from "vue";
 import { getPlaylistDetail, getAllSongs } from "@/request/api/playlist.js";
 import PlaylistHeader from "@/components/PlayList/PlaylistHeader.vue";
 import PlaylistContent from "@/components/PlayList/PlaylistContent.vue";
+import moment from "moment";
 
 const playlist = ref([]);
 const allSongsRaw = ref([]);
 const allSongsFormat = ref([]);
 const creator = ref(null);
-let songsIsReady = false;
+const songsIsReady = ref(false);
 onMounted(async () => {
-  songsIsReady = false;
+  songsIsReady.value = false;
   const id = useRouter().currentRoute.value.query.id;
   console.log(id);
   // 获取歌单详情
@@ -51,7 +52,7 @@ onMounted(async () => {
       allSongsRaw.value = response.data.songs;
       console.log("3");
       // console.log("3");
-      // console.log(allSongsRaw.value);
+      console.log(allSongsRaw.value);
     })
     .catch(function (error) {
       console.log(error);
@@ -59,30 +60,30 @@ onMounted(async () => {
     .then(function () {
       // 整理歌曲的数据
       for (const [key, value] of Object.entries(allSongsRaw.value)) {
+        // 歌手名字
         let newSinger = value.ar[0].name;
         if (value.ar.length > 1) {
           for (let i = 1; i < value.ar.length; i++) {
             newSinger += "/" + value.ar[i].name;
           }
         }
-        // console.log(newSinger);
+        // 专辑名
         const albumName = value.al.name;
+        //时长
+        const formatDate = moment(value.dt).format("mm:ss");
         const newSong = {
           index: +key + 1,
           title: value.name,
           singer: newSinger,
           album: albumName,
-          time: 100,
+          time: formatDate,
         };
         allSongsFormat.value.push(newSong);
       }
-      console.log(typeof songsIsReady);
-      console.log(7);
+      songsIsReady.value = true;
+      console.log("ready");
       console.log(allSongsFormat.value);
     });
-  setTimeout(() => {
-    songsIsReady = !songsIsReady;
-  }, 3000);
 });
 </script>
 
