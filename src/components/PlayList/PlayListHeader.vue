@@ -56,7 +56,7 @@ console.log("props");
 console.log(props);
 </script>
 
-<style>
+<style scoped>
 div.header {
   background-color: #121212;
   overflow: hidden;
