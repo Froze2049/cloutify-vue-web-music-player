@@ -9,9 +9,9 @@
         </div>
       </div>
       <div class="main-controller">
-        <div class="paly">
-          <span v-if="isPlaying" class="iconfont icon-Playerpause" />
-          <span v-else class="iconfont icon-Playerplay" />
+        <div class="paly-controller">
+          <span v-if="isPlaying" class="pause iconfont icon-24gf-pause2" />
+          <span v-else class="play iconfont icon-24gf-play" />
         </div>
         <div class="progress-bar"><el-slider :show-tooltip="false" /></div>
       </div>
@@ -41,8 +41,8 @@ console.log(isPlaying);
 }
 div.container {
   width: calc(100%-32px);
-  height: 58px;
-  padding: 16px;
+  height: 60px;
+  padding: 15px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -53,13 +53,16 @@ div.song-info {
   flex-direction: row;
   justify-content: flex-start;
   position: relative;
+  width: 238px;
+  height: 60px;
 }
 img.song-cover {
+  width: 60px;
   height: 60px;
   box-shadow: 0 0 8px #000000;
 }
 div.detail {
-  height: 58px;
+  height: 60px;
   margin: 0 14px;
 }
 div.title {
@@ -85,16 +88,21 @@ div.main-controller {
   height: 58px;
   padding: 0 375px 0 240px;
 }
-div.play {
+div.paly-controller {
   width: 550px;
   display: flex;
   box-sizing: border-box;
   justify-content: space-between;
-}
-span.icon-Playerpause,
-span.icon-Playerplay {
-  font-size: 35px;
   padding: 0 250px;
+}
+span.pause,
+span.play {
+  font-size: 30px;
+  color: #fff;
+}
+span.pause:hover,
+span.play:hover {
+  color: #bababa;
 }
 div.progress-bar {
   display: flex;

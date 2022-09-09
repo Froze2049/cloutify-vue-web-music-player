@@ -1,10 +1,10 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3634260 */
-  src: url("//at.alicdn.com/t/c/font_3634260_naooehlech.woff2?t=1662707877467")
+  src: url("//at.alicdn.com/t/c/font_3634260_y8b4mufsejd.woff2?t=1662718768685")
       format("woff2"),
-    url("//at.alicdn.com/t/c/font_3634260_naooehlech.woff?t=1662707877467")
+    url("//at.alicdn.com/t/c/font_3634260_y8b4mufsejd.woff?t=1662718768685")
       format("woff"),
-    url("//at.alicdn.com/t/c/font_3634260_naooehlech.ttf?t=1662707877467")
+    url("//at.alicdn.com/t/c/font_3634260_y8b4mufsejd.ttf?t=1662718768685")
       format("truetype");
 }
 
@@ -16,16 +16,20 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-24gf-pause2:before {
+  content: "\ea81";
+}
+
+.icon-24gf-play:before {
+  content: "\ea82";
+}
+
 .icon-31shoucang:before {
   content: "\e600";
 }
 
 .icon-fenxiang:before {
   content: "\e739";
-}
-
-.icon-Play:before {
-  content: "\e624";
 }
 
 .icon-sousuo:before {
@@ -48,20 +52,12 @@
   content: "\e64b";
 }
 
-.icon-Playerplay:before {
-  content: "\e6b0";
-}
-
 .icon-Playernext:before {
   content: "\e6b1";
 }
 
 .icon-Playerfastforward:before {
   content: "\e6b2";
-}
-
-.icon-Playerpause:before {
-  content: "\e6b3";
 }
 
 .icon-icon-:before {

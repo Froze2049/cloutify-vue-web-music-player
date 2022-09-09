@@ -8,7 +8,7 @@
       <img :src="playlist.coverImgUrl" />
       <div class="button">
         <el-button type="primary" round class="normal" color="#1ed760">
-          <el-icon class="iconfont icon-Play" />
+          <el-icon class="iconfont icon-24gf-play" />
           <span class="button-text">播放全部</span>
         </el-button>
         <el-button style="margin-left: 0" class="normal" round color="#282828">
@@ -45,11 +45,11 @@
 <script setup>
 import moment from "moment";
 import { onMounted, ref, toRefs } from "vue";
-const props = defineProps(["playlist", "creator"]);
+const props = defineProps(["playlist", "creator", "createTime"]);
 const formatDate = ref("");
 onMounted(() => {
   formatDate.value = moment(toRefs(props).playlist.value.createTime).format(
-    "YYYY-MM-DD"
+    "YY-MM-DD"
   );
 });
 console.log("props");

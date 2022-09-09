@@ -2,6 +2,8 @@
   <div class="container">
     <el-scrollbar max-height="580px">
       <playlist-header
+        v-if="headerIsReady"
+        :createTime="createTime"
         :playlist="playlist"
         :creator="creator"
       ></playlist-header>
@@ -26,8 +28,11 @@ const allSongsRaw = ref([]);
 const allSongsFormat = ref([]);
 const creator = ref(null);
 const songsIsReady = ref(false);
+const headerIsReady = ref(false);
+const createTime = ref(null);
 onMounted(async () => {
   songsIsReady.value = false;
+  headerIsReady.value = false;
   const id = useRouter().currentRoute.value.query.id;
   console.log(id);
   // 获取歌单详情
@@ -36,6 +41,8 @@ onMounted(async () => {
       // 处理成功情况
       playlist.value = response.data.playlist;
       creator.value = response.data.playlist.creator.nickname;
+      createTime.value = response.data.playlist.createTime;
+      headerIsReady.value = true;
     })
     .catch(function (error) {
       console.log(error);
