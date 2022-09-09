@@ -1,5 +1,6 @@
 <template>
   <div class="bottom-now-playing-bar">
+    <audio :src="songUrl" ref="music" @timeupdate="timeupdate"></audio>
     <div class="container">
       <div class="song-info">
         <img class="song-cover" :src="defaultImg" />
@@ -10,8 +11,12 @@
       </div>
       <div class="main-controller">
         <div class="paly-controller">
-          <span v-if="isPlaying" class="pause iconfont icon-24gf-pause2" />
-          <span v-else class="play iconfont icon-24gf-play" />
+          <span
+            @click="pause"
+            v-if="isPlaying"
+            class="pause iconfont icon-24gf-pause2"
+          />
+          <span v-else @click="play" class="play iconfont icon-24gf-play" />
         </div>
         <div class="progress-bar"><el-slider :show-tooltip="false" /></div>
       </div>
@@ -24,12 +29,51 @@
   </div>
 </template>
 
+<!-- <script>
+import { mapActions } from "vuex";
+export default {
+  data() {
+    return {};
+  },
+  computed: {
+    ...mapActions(["playlist", "playlistIndex"]),
+  },
+  mounted() {
+    console.log(this.$refs);
+  },
+  methods: {
+    play() {
+      this.$refs.audio.play();
+    },
+  },
+};
+</script> -->
+
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import { mapState } from "vuex";
+mapState(["playlist", "playlistIndex"]);
 const defaultImg =
   "https://s4.music.126.net/style/web2/img/default/default_album.jpg";
 const isPlaying = ref(false);
-console.log(isPlaying);
+const songUrl = "https://music.163.com/song/media/outer/url?id=29535434";
+const music = ref(null);
+//播放
+const play = () => {
+  console.log("dfwf");
+  music.value.play();
+  isPlaying.value = true;
+};
+//暂停
+const pause = () => {
+  console.log("dfwf");
+  music.value.pause();
+  isPlaying.value = false;
+};
+
+onMounted(() => {
+  // console.log(music.value);
+});
 </script>
 
 <style scoped>
@@ -108,7 +152,8 @@ div.progress-bar {
   display: flex;
   align-items: center;
 }
-div.progress-bar .el-slider {
+div.progress-bar .el-slider,
+div.side-controller .el-slider {
   width: 550px;
   --el-slider-button-size: 11px;
 }

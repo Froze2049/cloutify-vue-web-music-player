@@ -1,6 +1,10 @@
 <template>
   <div class="table">
-    <el-table :data="allSongsFormat" style="width: 100%">
+    <el-table
+      @row-dblclick="playSong"
+      :data="allSongsFormat"
+      style="width: 100%"
+    >
       <el-table-column prop="index" label="" width="80" />
       <el-table-column prop="title" label="标题" width="450" />
       <el-table-column prop="singer" label="歌手" width="320" />
@@ -14,6 +18,11 @@
 const props = defineProps(["allSongsFormat"]);
 console.log(8);
 console.log(props);
+const playSong = (row) => {
+  const selectSongId = row.id;
+
+  console.log(selectSongId);
+};
 </script>
 
 <style scoped>

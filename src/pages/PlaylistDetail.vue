@@ -54,11 +54,8 @@ onMounted(async () => {
   getAllSongs(id)
     .then((response) => {
       // 处理成功情况
-      // console.log("2");
-      // console.log(response);
       allSongsRaw.value = response.data.songs;
-      console.log("3");
-      // console.log("3");
+      console.log("ssss");
       console.log(allSongsRaw.value);
     })
     .catch(function (error) {
@@ -84,6 +81,7 @@ onMounted(async () => {
           singer: newSinger,
           album: albumName,
           time: formatDate,
+          id: value.id,
         };
         allSongsFormat.value.push(newSong);
       }
