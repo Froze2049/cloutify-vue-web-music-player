@@ -1,35 +1,57 @@
 import { createStore } from "vuex";
 
-const useStore = createStore({
+const store = createStore({
   state() {
     return {
       playlist: [
         {
-          al: {
-            id: null,
-            name: "",
-            pic: null,
-            picUrl: "",
-            pic_str: "",
-          },
-          id: null,
+          index: 0,
+          title: "",
+          singer: "",
+          album: "",
+          time: "",
+          id: 0,
+          pic: "https://s4.music.126.net/style/web2/img/default/default_album.jpg",
         },
       ],
-      playlistIndex: null,
-      isdeed: true,
+      playlistIndex: 1,
+      isPlaying: false,
+      audioDom: null,
     };
   },
   actions: {},
   mutations: {
     updatePlaylist(state, value) {
-      state.playlist = value;
+      state.playlist = value.playlist;
+      state.playlistIndex = value.index;
+      console.log("dssd");
+      console.log(state.playlistIndex);
+    },
+    updateIsPlaying(state, value) {
+      if (value) {
+        state.audioDom.play();
+      } else {
+        state.audioDom.pause();
+      }
+      state.isPlaying = value;
+    },
+    updateAudioDom(state, value) {
+      state.audioDom = value;
+      console.log("dfwf");
+      console.log(value);
     },
   },
   getters: {
-    connected(state) {
-      return state.isdeed;
+    playlist(state) {
+      return state.playlist;
+    },
+    isPlaying(state) {
+      return state.isPlaying;
+    },
+    nowPlaying(state) {
+      return state.playlist[state.playlistIndex - 1];
     },
   },
 });
 
-export default useStore;
+export default store;

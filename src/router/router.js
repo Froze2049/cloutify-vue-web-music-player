@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-
 import DiscoveryView from "@/pages/DiscoveryView.vue";
 import PlaylistDetail from "@/pages/PlaylistDetail.vue";
 

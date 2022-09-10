@@ -75,6 +75,10 @@ onMounted(async () => {
         const albumName = value.al.name;
         //时长
         const formatDate = moment(value.dt).format("mm:ss");
+        let isVIP = false;
+        if (value.fee === 0 || value.fee === 1) {
+          isVIP = true;
+        }
         const newSong = {
           index: +key + 1,
           title: value.name,
@@ -82,6 +86,8 @@ onMounted(async () => {
           album: albumName,
           time: formatDate,
           id: value.id,
+          pic: value.al.picUrl,
+          isVIP: isVIP,
         };
         allSongsFormat.value.push(newSong);
       }

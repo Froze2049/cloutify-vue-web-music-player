@@ -1,12 +1,17 @@
 <template>
   <div class="bottom-now-playing-bar">
-    <audio :src="songUrl" ref="music" @timeupdate="timeupdate"></audio>
+    <audio
+      :src="songUrl"
+      ref="music"
+      @timeupdate="onTimeupdate"
+      @loadedmetadata="onLoadedmetadata"
+    ></audio>
     <div class="container">
       <div class="song-info">
-        <img class="song-cover" :src="defaultImg" />
+        <img class="song-cover" :src="songImg" />
         <div class="detail">
-          <div class="title">ALIEN SUPERSTAR ALIEN SUPERSTAR</div>
-          <div class="singer">Beyonce</div>
+          <div class="title">{{ nowPlaying.title }}</div>
+          <div class="singer">{{ nowPlaying.singer }}</div>
         </div>
       </div>
       <div class="main-controller">
@@ -18,61 +23,103 @@
           />
           <span v-else @click="play" class="play iconfont icon-24gf-play" />
         </div>
-        <div class="progress-bar"><el-slider :show-tooltip="false" /></div>
+        <div class="progress-bar">
+          <el-slider
+            :max="audio.maxTime"
+            v-model="audio.currentTime"
+            :show-tooltip="false"
+          />
+        </div>
       </div>
       <div class="side-controller">
         <div class="volume">
-          <el-slider> :show-tooltip="false" </el-slider>
+          <span class="iconfont icon-Volume" />
+          <el-slider
+            :step="0.01"
+            :max="1"
+            v-model="audio.volume"
+            @input="voiceChange"
+            :format-tooltip="handelVoice"
+          >
+          </el-slider>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<!-- <script>
-import { mapActions } from "vuex";
-export default {
-  data() {
-    return {};
-  },
-  computed: {
-    ...mapActions(["playlist", "playlistIndex"]),
-  },
-  mounted() {
-    console.log(this.$refs);
-  },
-  methods: {
-    play() {
-      this.$refs.audio.play();
-    },
-  },
-};
-</script> -->
-
 <script setup>
-import { ref, onMounted } from "vue";
-import { mapState } from "vuex";
-mapState(["playlist", "playlistIndex"]);
-const defaultImg =
-  "https://s4.music.126.net/style/web2/img/default/default_album.jpg";
-const isPlaying = ref(false);
-const songUrl = "https://music.163.com/song/media/outer/url?id=29535434";
+import { ref, computed, onMounted, watch } from "vue";
+import { useStore } from "vuex";
+
+const store = useStore();
 const music = ref(null);
+const isPlaying = computed(() => store.getters.isPlaying);
+const nowPlaying = computed(() => store.getters.nowPlaying);
+const audio = ref({
+  // 播放状态
+  playing: false,
+  // 静音状态
+  muted: false,
+  // 音频当前播放时长
+  currentTime: 0,
+  // 音量
+  volume: 1,
+  // 音频最大播放时长
+  maxTime: 0,
+});
+
+const songUrl = computed(
+  () =>
+    `https://music.163.com/song/media/outer/url?id=${nowPlaying.value.id}.mp3`
+);
+const songImg = computed(() => nowPlaying.value.pic);
+const updateIsPlaying = (value) => {
+  store.commit("updateIsPlaying", value);
+};
+const updateAudioDom = (value) => {
+  store.commit("updateAudioDom", value);
+};
+// 更新音频流的当前播放时间
+const onTimeupdate = (res) => {
+  audio.value.currentTime = res.target.currentTime;
+};
+// 获取音频长度
+const onLoadedmetadata = (res) => {
+  audio.value.maxTime = parseInt(res.target.duration);
+};
+// 拖动进度滚动条
+// const progressChange = () => {
+//   console.log("拖动滚动条触发", this.cacheCurrent);
+//   audio.value.currentTime = this.cacheCurrent;
+//   audio.value.currentTime = this.cacheCurrent;
+// };
+
+// 拖动音量滚动条
+const voiceChange = () => {
+  music.value.volume = audio.value.volume;
+};
+// 音量提示
+const handelVoice = () => {
+  return parseInt(audio.value.volume.toFixed(2) * 100);
+};
 //播放
 const play = () => {
-  console.log("dfwf");
-  music.value.play();
-  isPlaying.value = true;
+  updateIsPlaying(true);
 };
 //暂停
 const pause = () => {
-  console.log("dfwf");
-  music.value.pause();
-  isPlaying.value = false;
+  updateIsPlaying(false);
+  console.log("wdeferfref");
+  console.log(music.value.duration);
 };
-
+watch(songUrl, () => {
+  console.log("dvg");
+  console.log(music);
+  updateIsPlaying(false);
+});
 onMounted(() => {
-  // console.log(music.value);
+  updateAudioDom(music.value);
 });
 </script>
 
@@ -130,7 +177,7 @@ div.singer {
 }
 div.main-controller {
   height: 58px;
-  padding: 0 375px 0 240px;
+  padding: 0 344px 0 240px;
 }
 div.paly-controller {
   width: 550px;
@@ -157,7 +204,7 @@ div.side-controller .el-slider {
   width: 550px;
   --el-slider-button-size: 11px;
 }
-::v-deep .el-slider__runway {
+:deep .el-slider__runway {
   height: 5px;
 }
 div.side-controller {
@@ -167,5 +214,17 @@ div.side-controller {
 }
 div.side-controller .el-slider {
   width: 100px;
+}
+div.volume {
+  -webkit-box-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  position: relative;
+}
+div.volume span {
+  font-size: 20px;
+  margin-right: 10px;
 }
 </style>
