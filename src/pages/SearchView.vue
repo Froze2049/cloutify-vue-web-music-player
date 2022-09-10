@@ -1,6 +1,9 @@
 <template>
   <div class="container">
     <el-scrollbar max-height="580px">
+      <div class="hint">
+        <span>搜索"{{ store.getters.searchValue }}"，找到以下结果</span>
+      </div>
       <playlist-content
         v-if="resultsIsReady"
         :allSongsFormat="allResultsFormat"
@@ -12,16 +15,18 @@
 <script setup>
 import { getSearchResult } from "@/request/api/search.js";
 import { useStore } from "vuex";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
+import { useRouter } from "vue-router";
 import PlaylistContent from "@/components/PlayList/PlaylistContent.vue";
 import methods from "@/utils/index.js";
 
 const resultsIsReady = ref(false);
 const store = useStore();
+const router = ref(useRouter());
 const allResultsRaw = ref([]);
 const allResultsFormat = ref([]);
-
-onMounted(async () => {
+// 获取搜索结果
+const onGetResults = () => {
   resultsIsReady.value = false;
   getSearchResult(store.getters.searchValue)
     .then((response) => {
@@ -39,6 +44,14 @@ onMounted(async () => {
       console.log("ready2");
       console.log(allResultsFormat.value);
     });
+};
+
+watch(router.value, () => {
+  onGetResults();
+});
+
+onMounted(async () => {
+  onGetResults();
 });
 </script>
 
@@ -46,5 +59,9 @@ onMounted(async () => {
 .container {
   grid-area: main-view;
   background-color: #121212;
+}
+div.hint {
+  color: #fff;
+  margin: 20px 0 0 20px;
 }
 </style>

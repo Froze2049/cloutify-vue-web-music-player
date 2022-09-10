@@ -30,12 +30,8 @@ const creator = ref(null);
 const songsIsReady = ref(false);
 const headerIsReady = ref(false);
 const createTime = ref(null);
-onMounted(async () => {
-  songsIsReady.value = false;
-  headerIsReady.value = false;
-  const id = useRouter().currentRoute.value.query.id;
-  console.log(id);
-  // 获取歌单详情
+// 获取歌单详情
+const onGetPlaylistDetail = (id) => {
   getPlaylistDetail(id)
     .then((response) => {
       // 处理成功情况
@@ -50,7 +46,9 @@ onMounted(async () => {
     .then(function () {
       sessionStorage.setItem("itemDetail", JSON.stringify(playlist));
     });
-  // 获取歌单所有歌曲
+};
+// 获取歌单所有歌曲
+const onGetAllSongs = (id) => {
   getAllSongs(id)
     .then((response) => {
       // 处理成功情况
@@ -68,6 +66,14 @@ onMounted(async () => {
       console.log("ready");
       console.log(allSongsFormat.value);
     });
+};
+onMounted(async () => {
+  songsIsReady.value = false;
+  headerIsReady.value = false;
+  const id = useRouter().currentRoute.value.query.id;
+  console.log(id);
+  onGetPlaylistDetail(id);
+  onGetAllSongs(id);
 });
 </script>
 

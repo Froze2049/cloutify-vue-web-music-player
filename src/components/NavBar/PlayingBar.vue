@@ -141,6 +141,7 @@ onMounted(() => {
   height: 90px;
   background-color: #181818;
   color: #fff;
+  border-top: 1px solid #363636;
 }
 div.container {
   width: calc(100%-32px);
@@ -150,6 +151,7 @@ div.container {
   flex-direction: row;
   justify-content: flex-start;
   position: relative;
+  background-color: #181818;
 }
 div.song-info {
   display: flex;

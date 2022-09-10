@@ -27,7 +27,7 @@ const store = useStore();
 const router = useRouter();
 const enterValue = ref("");
 const input = ref(null);
-// let results = ref([]);
+
 // 更新搜索值
 const updateSearchValue = (value) => {
   store.commit("updateSearchValue", value);
@@ -35,8 +35,11 @@ const updateSearchValue = (value) => {
 const onSearch = () => {
   updateSearchValue(enterValue.value);
   router.push({ path: "/search", query: { keywords: enterValue.value } });
+  enterValue.value = "";
+  input.value.blur();
 };
-// onMounted(async () => {
+
+// onMounted(() => {
 
 // });
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">ddwd</div>
+  <div class="container"></div>
 </template>
 
 <style>
