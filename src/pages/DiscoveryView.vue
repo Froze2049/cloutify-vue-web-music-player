@@ -31,12 +31,9 @@ onMounted(async () => {
       banners.value = response.data.banners;
     })
     .catch(function (error) {
-      // 处理错误情况
       console.log(error);
     })
-    .then(function () {
-      // 总是会执行
-    });
+    .then(function () {});
 });
 </script>
 

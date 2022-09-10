@@ -17,6 +17,7 @@ const store = createStore({
       playlistIndex: 1,
       isPlaying: false,
       audioDom: null,
+      searchValue: "",
     };
   },
   actions: {},
@@ -40,6 +41,9 @@ const store = createStore({
       console.log("dfwf");
       console.log(value);
     },
+    updateSearchValue(state, value) {
+      state.searchValue = value;
+    },
   },
   getters: {
     playlist(state) {
@@ -50,6 +54,9 @@ const store = createStore({
     },
     nowPlaying(state) {
       return state.playlist[state.playlistIndex - 1];
+    },
+    searchValue(state) {
+      return state.searchValue;
     },
   },
 });

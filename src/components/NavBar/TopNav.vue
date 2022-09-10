@@ -6,13 +6,39 @@
     </div>
     <div class="search">
       <span class="iconfont icon-sousuo"></span>
-      <input type="text" placeholder="搜索" title="输入关键词搜索" />
+      <input
+        @keyup.enter="onSearch"
+        type="text"
+        placeholder="搜索"
+        title="输入关键词搜索"
+        v-model="enterValue"
+        ref="input"
+      />
     </div>
   </div>
 </template>
 
-<script>
-export default {};
+<script setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { useStore } from "vuex";
+
+const store = useStore();
+const router = useRouter();
+const enterValue = ref("");
+const input = ref(null);
+// let results = ref([]);
+// 更新搜索值
+const updateSearchValue = (value) => {
+  store.commit("updateSearchValue", value);
+};
+const onSearch = () => {
+  updateSearchValue(enterValue.value);
+  router.push({ path: "/search", query: { keywords: enterValue.value } });
+};
+// onMounted(async () => {
+
+// });
 </script>
 
 <style scoped>

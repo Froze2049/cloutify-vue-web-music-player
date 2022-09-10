@@ -19,9 +19,9 @@
 import { useRouter } from "vue-router";
 import { onMounted, ref } from "vue";
 import { getPlaylistDetail, getAllSongs } from "@/request/api/playlist.js";
+import methods from "@/utils/index.js";
 import PlaylistHeader from "@/components/PlayList/PlaylistHeader.vue";
 import PlaylistContent from "@/components/PlayList/PlaylistContent.vue";
-import moment from "moment";
 
 const playlist = ref([]);
 const allSongsRaw = ref([]);
@@ -63,34 +63,7 @@ onMounted(async () => {
     })
     .then(function () {
       // 整理歌曲的数据
-      for (const [key, value] of Object.entries(allSongsRaw.value)) {
-        // 歌手名字
-        let newSinger = value.ar[0].name;
-        if (value.ar.length > 1) {
-          for (let i = 1; i < value.ar.length; i++) {
-            newSinger += "/" + value.ar[i].name;
-          }
-        }
-        // 专辑名
-        const albumName = value.al.name;
-        //时长
-        const formatDate = moment(value.dt).format("mm:ss");
-        let isVIP = false;
-        if (value.fee === 0 || value.fee === 1) {
-          isVIP = true;
-        }
-        const newSong = {
-          index: +key + 1,
-          title: value.name,
-          singer: newSinger,
-          album: albumName,
-          time: formatDate,
-          id: value.id,
-          pic: value.al.picUrl,
-          isVIP: isVIP,
-        };
-        allSongsFormat.value.push(newSong);
-      }
+      allSongsFormat.value = methods.formatSongs(allSongsRaw.value);
       songsIsReady.value = true;
       console.log("ready");
       console.log(allSongsFormat.value);

@@ -2,9 +2,21 @@
   <div class="left-nav-bar">
     <div class="logo"></div>
     <ul>
-      <li class="active"><span class="iconfont icon-icon-1"></span>发现音乐</li>
-      <li><span class="iconfont icon-icon-2"></span>推荐歌单</li>
-      <li><span class="iconfont icon-icon-"></span>最新音乐</li>
+      <li class="active">
+        <router-link :to="{ path: '/discovery' }">
+          <div><span class="iconfont icon-icon-1"></span>发现音乐</div>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{ path: '/discovery/playlist' }">
+          <div><span class="iconfont icon-icon-2"></span>推荐歌单</div>
+        </router-link>
+      </li>
+      <li>
+        <router-link :to="{ path: '/discovery/music' }">
+          <div><span class="iconfont icon-icon-"></span>最新音乐</div>
+        </router-link>
+      </li>
     </ul>
   </div>
 </template>
@@ -14,6 +26,14 @@ export default {};
 </script>
 
 <style scoped>
+.router-link-active {
+  text-decoration: none;
+  color: #fff;
+}
+a {
+  text-decoration: none;
+  color: #fff;
+}
 .left-nav-bar {
   grid-area: nav-bar;
   background-color: #000000;

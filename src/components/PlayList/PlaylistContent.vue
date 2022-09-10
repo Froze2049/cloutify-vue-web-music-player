@@ -6,14 +6,14 @@
       style="width: 100%"
     >
       <el-table-column prop="index" label="" width="80" />
-      <el-table-column prop="title" label="标题" width="450">
+      <el-table-column prop="title" label="标题" width="430">
         <template #default="scope">
           {{ scope.row.title }}
           <span v-if="scope.row.isVIP" class="tag">VIP</span>
         </template>
       </el-table-column>
       <el-table-column prop="singer" label="歌手" width="320" />
-      <el-table-column prop="album" label="专辑" width="320" />
+      <el-table-column prop="album" label="专辑" width="340" />
       <el-table-column prop="time" label="时间" />
     </el-table>
   </div>
