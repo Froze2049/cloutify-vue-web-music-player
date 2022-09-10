@@ -49,6 +49,7 @@
 </template>
 
 <script setup>
+import { getSongDetail } from "@/request/api/player.js";
 import { ref, computed, onMounted, watch } from "vue";
 import { useStore } from "vuex";
 
@@ -117,6 +118,17 @@ watch(songUrl, () => {
   console.log("dvg");
   console.log(music);
   updateIsPlaying(false);
+  getSongDetail(nowPlaying.value.id)
+    .then((response) => {
+      // 处理成功情况
+      nowPlaying.value.pic = response.data.songs[0].al.picUrl;
+      console.log("汇报5");
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+    .then(function () {});
 });
 onMounted(() => {
   updateAudioDom(music.value);
