@@ -55,7 +55,7 @@ onMounted(async () => {
 });
 </script>
 
-<style>
+<style scoped>
 .container {
   grid-area: main-view;
   background-color: #121212;

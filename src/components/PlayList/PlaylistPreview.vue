@@ -75,9 +75,11 @@ a {
   display: flex;
   background-color: #181818;
   border-radius: 0 0 5px 5px;
+  transition: all 0.2s;
 }
 .bottom:hover {
   background-color: #282828;
+  transition: all 0.2s;
 }
 div.top {
   overflow: hidden;

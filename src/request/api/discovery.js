@@ -15,3 +15,11 @@ export function getPlayList() {
     url: "/personalized?limit=12",
   });
 }
+
+// 推荐新音乐
+export function getNewMusic() {
+  return service({
+    method: "GET",
+    url: "/personalized/newsong?limit=18",
+  });
+}

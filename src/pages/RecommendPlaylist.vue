@@ -2,7 +2,7 @@
   <div class="container"></div>
 </template>
 
-<style>
+<style scoped>
 .container {
   grid-area: main-view;
   background-color: #121212;

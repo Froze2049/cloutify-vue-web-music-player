@@ -2,17 +2,26 @@
   <div class="left-nav-bar">
     <div class="logo"></div>
     <ul>
-      <li class="active">
+      <li
+        @click="updateSelectedItem('discovery')"
+        :class="{ active: selectedItem === 'discovery' }"
+      >
         <router-link :to="{ path: '/discovery' }">
           <div><span class="iconfont icon-icon-1"></span>发现音乐</div>
         </router-link>
       </li>
-      <li>
+      <li
+        @click="updateSelectedItem('playlist')"
+        :class="{ active: selectedItem === 'playlist' }"
+      >
         <router-link :to="{ path: '/discovery/playlist' }">
           <div><span class="iconfont icon-icon-2"></span>推荐歌单</div>
         </router-link>
       </li>
-      <li>
+      <li
+        @click="updateSelectedItem('music')"
+        :class="{ active: selectedItem === 'music' }"
+      >
         <router-link :to="{ path: '/discovery/music' }">
           <div><span class="iconfont icon-icon-"></span>最新音乐</div>
         </router-link>
@@ -21,8 +30,26 @@
   </div>
 </template>
 
-<script>
-export default {};
+<script setup>
+import { computed } from "vue";
+import { useStore } from "vuex";
+// import { useRoute } from "vue-router";
+
+const store = useStore();
+// const route = useRoute();
+const selectedItem = computed(() => store.getters.selectedItem);
+const updateSelectedItem = (value) => {
+  store.commit("updateSelectedItem", value);
+};
+// onMounted(() => {
+//   if (route.fullPath === "/discovery/music") {
+//     updateSelectedItem("music");
+//   } else if (route.fullPath === "/discovery/playlist") {
+//     updateSelectedItem("playlist");
+//   } else {
+//     updateSelectedItem("discovery");
+//   }
+// });
 </script>
 
 <style scoped>
@@ -59,11 +86,13 @@ li {
   line-height: 60px;
   height: 100%;
   cursor: pointer;
+  transition: all 0.2s;
 }
 li:hover,
 li.active {
   border-radius: 7px;
   background-color: #282828;
+  transition: all 0.2s;
 }
 span {
   font-size: 18px;

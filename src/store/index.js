@@ -8,8 +8,8 @@ const store = createStore({
           index: 0,
           title: "",
           singer: "",
-          album: "",
-          time: "",
+          // album: "",
+          // time: "",
           id: 0,
           pic: "https://s4.music.126.net/style/web2/img/default/default_album.jpg",
         },
@@ -18,6 +18,7 @@ const store = createStore({
       isPlaying: false,
       audioDom: null,
       searchValue: "",
+      selectedItem: "",
     };
   },
   actions: {},
@@ -38,11 +39,14 @@ const store = createStore({
     },
     updateAudioDom(state, value) {
       state.audioDom = value;
-      console.log("dfwf");
-      console.log(value);
     },
     updateSearchValue(state, value) {
       state.searchValue = value;
+    },
+    updateSelectedItem(state, value) {
+      state.selectedItem = value;
+      console.log("3333535");
+      console.log(value);
     },
   },
   getters: {
@@ -57,6 +61,9 @@ const store = createStore({
     },
     searchValue(state) {
       return state.searchValue;
+    },
+    selectedItem(state) {
+      return state.selectedItem;
     },
   },
 });
