@@ -13,7 +13,8 @@
           </el-carousel-item>
         </el-carousel>
       </div>
-      <playlist-preview></playlist-preview>
+      <div class="title">发现歌单</div>
+      <playlist-preview :requestNumber="requestNumber"></playlist-preview>
     </el-scrollbar>
   </div>
 </template>
@@ -23,6 +24,7 @@ import { ref, onMounted } from "vue";
 import { getBanner } from "@/request/api/discovery.js";
 import PlaylistPreview from "@/components/PlayList/PlaylistPreview.vue";
 let banners = ref([]);
+const requestNumber = 12; // 设定歌单请求数量为12
 
 onMounted(async () => {
   getBanner()
@@ -60,5 +62,12 @@ div.carousel {
 
 .el-carousel__item:nth-child(2n + 1) {
   background-color: #d3dce6;
+}
+div.title {
+  color: #fff;
+  height: 50px;
+  margin-left: 20px;
+  font-weight: 400;
+  font-size: 19px;
 }
 </style>

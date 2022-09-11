@@ -9,10 +9,10 @@ export function getBanner() {
 }
 
 // 获取推荐歌单
-export function getPlayList() {
+export function getPlayList(num) {
   return service({
     method: "GET",
-    url: "/personalized?limit=12",
+    url: `/personalized?limit=${num}`,
   });
 }
 

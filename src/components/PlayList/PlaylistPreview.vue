@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <div class="title">发现歌单</div>
     <div class="list">
       <div class="card" v-for="list in playLists" :key="list">
         <router-link :to="{ path: '/playlist', query: { id: list.id } }">
@@ -18,11 +17,12 @@
 
 <script setup>
 import { getPlayList } from "@/request/api/discovery";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, toRefs } from "vue";
 
+const props = defineProps(["requestNumber"]);
 const playLists = ref([]);
 onMounted(async () => {
-  getPlayList()
+  getPlayList(toRefs(props).requestNumber.value)
     .then((response) => {
       // 处理成功情况
       console.log(response);
@@ -40,13 +40,6 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-div.title {
-  color: #fff;
-  height: 50px;
-  margin: 0 0 0 20px;
-  font-weight: 400;
-  font-size: 19px;
-}
 div.list {
   display: inline-flex;
   flex-wrap: wrap;
