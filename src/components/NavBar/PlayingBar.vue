@@ -5,6 +5,7 @@
       ref="music"
       @timeupdate="onTimeupdate"
       @loadedmetadata="onLoadedmetadata"
+      @ended="pause"
     ></audio>
     <div class="container">
       <div class="song-info">
@@ -28,6 +29,7 @@
             :max="audio.maxTime"
             v-model="audio.currentTime"
             :show-tooltip="false"
+            @input="progressChange"
           />
         </div>
       </div>
@@ -83,18 +85,20 @@ const updateAudioDom = (value) => {
 };
 // 更新音频流的当前播放时间
 const onTimeupdate = (res) => {
-  audio.value.currentTime = res.target.currentTime;
+  // 当前时间等于最大时间时停止更新，否则无法触发ended事件
+  if (audio.value.currentTime < audio.value.maxTime) {
+    audio.value.currentTime = res.target.currentTime;
+  }
 };
 // 获取音频长度
 const onLoadedmetadata = (res) => {
   audio.value.maxTime = parseInt(res.target.duration);
 };
-// 拖动进度滚动条
-// const progressChange = () => {
-//   console.log("拖动滚动条触发", this.cacheCurrent);
-//   audio.value.currentTime = this.cacheCurrent;
-//   audio.value.currentTime = this.cacheCurrent;
-// };
+// 拖动进度滚动条;
+const progressChange = (val) => {
+  music.value.currentTime = val;
+  audio.value.currentTime = val;
+};
 
 // 拖动音量滚动条
 const voiceChange = () => {
@@ -212,6 +216,15 @@ span.play:hover {
 div.progress-bar {
   display: flex;
   align-items: center;
+}
+:deep .el-slider__runway {
+  background-color: #5a5a5a;
+}
+:deep .el-slider__bar {
+  background-color: #1ed760;
+}
+:deep .el-slider__button {
+  border: solid 2px #fff;
 }
 div.progress-bar .el-slider,
 div.side-controller .el-slider {

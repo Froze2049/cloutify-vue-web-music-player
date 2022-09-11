@@ -1,8 +1,8 @@
 <template>
   <div class="top-nav-bar">
     <div class="switch">
-      <span class="iconfont icon-houtui"></span>
-      <span class="iconfont icon-qianjin"></span>
+      <span @click="back" class="iconfont icon-houtui"></span>
+      <span @click="forward" class="iconfont icon-qianjin"></span>
     </div>
     <div class="search">
       <span class="iconfont icon-sousuo"></span>
@@ -38,10 +38,12 @@ const onSearch = () => {
   enterValue.value = "";
   input.value.blur();
 };
-
-// onMounted(() => {
-
-// });
+const back = () => {
+  router.go(-1);
+};
+const forward = () => {
+  router.go(1);
+};
 </script>
 
 <style scoped>
