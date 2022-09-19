@@ -18,7 +18,7 @@ const store = createStore({
       isPlaying: false,
       audioDom: null,
       searchValue: "",
-      selectedItem: "",
+      selectedItem: "discovery",
     };
   },
   actions: {},

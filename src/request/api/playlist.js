@@ -12,6 +12,6 @@ export function getPlaylistDetail(id) {
 export function getAllSongs(id) {
   return service({
     method: "GET",
-    url: `/playlist/track/all?id=${id}&limit=50&offset=0`,
+    url: `/playlist/track/all?id=${id}&limit=20&offset=0`,
   });
 }

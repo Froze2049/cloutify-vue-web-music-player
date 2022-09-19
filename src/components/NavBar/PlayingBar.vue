@@ -83,7 +83,7 @@ const updateIsPlaying = (value) => {
 const updateAudioDom = (value) => {
   store.commit("updateAudioDom", value);
 };
-// 更新音频流的当前播放时间
+// 更新当前播放时间
 const onTimeupdate = (res) => {
   // 当前时间等于最大时间时停止更新，否则无法触发ended事件
   if (audio.value.currentTime < audio.value.maxTime) {
@@ -96,8 +96,16 @@ const onLoadedmetadata = (res) => {
 };
 // 拖动进度滚动条;
 const progressChange = (val) => {
+  let timer = null;
+  music.value.muted = "muted";
   music.value.currentTime = val;
   audio.value.currentTime = val;
+  clearTimeout(timer);
+  // 设定防抖
+  timer = setTimeout(function () {
+    console.log("111");
+    music.value.muted = "";
+  }, 200);
 };
 
 // 拖动音量滚动条
